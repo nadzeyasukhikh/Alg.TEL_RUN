@@ -44,38 +44,36 @@
 // Решение через рекурсию
 
 
-// function sequence(n) {
-//     if (n === 0 || n === 1) {
-//       return 1;
-//     } else if (n % 2 === 0) {
-//       return sequence(n / 2) + sequence(n / 2 - 1);
-//     } else {
-//       return sequence((n - 1) / 2) - sequence((n - 1) / 2 - 1);
-//     }
-//   }
-//   const recursive = sequence(10);
-//   console.log(recursive);
+function sequence(n) {
+    if (n === 0 || n === 1) {
+      return 1;
+    } else if (n % 2 === 0) {
+      return sequence(n / 2) + sequence(n / 2 - 1);
+    } else {
+      return sequence((n - 1) / 2) - sequence((n - 1) / 2 - 1);
+    }
+  }
+  const recursive = sequence(10);
+  console.log(recursive);
 
 
   // Решение с оптимизацией методом мемоизации
   
-  function sequence(n, memo = {}) {
-    if (n in memo) {
-      return memo[n];
-    }
-  
-    if (n === 0 || n === 1) {
-      return 1;
-    } else if (n % 2 === 0) {
-      memo[n] = sequence(n / 2, memo) + sequence(n / 2 - 1, memo);
-    } else {
-      memo[n] = sequence((n - 1) / 2, memo) - sequence((n - 1) / 2 - 1, memo);
-    }
-  
-    return memo[n];
-  }
-  const memoized = sequence(15);
- 
-  console.log(memoized);
-  
+  function sequence(n, sum = 0) {
+        if (sum >n) {
+          return sum;
+        }
+      
+        if (n === 0 || n === 1) {
+          return 1;
+        } else if (n % 2 === 0) {
+          return sequence(n / 2,sum) + sequence(n / 2 - 1, sum);
+        } else {
+          return sequence((n - 1) / 2, sum) - sequence((n - 1) / 2 - 1, sum);
+        }
+      
+      }
+      const memoized = sequence(5);
+     
+      console.log(memoized);
   
